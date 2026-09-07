@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PathFinder 🧭 - Career Library</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .library-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .career-card {
+            background: #fff;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-left: 5px solid #004d99;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .career-card h3 {
+            color: #004d99;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+        .career-card p {
+            color: #555;
+            font-size: 0.95em;
+        }
+        .library-header h2 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <h1 style="font-size: 1.8em;"><a href="/dashboard" style="text-decoration: none; color: white;">PathFinder 🧭</a></h1>
+            <a href="/dashboard.html" style="color: white; text-decoration: underline;">Back to Dashboard</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="library-container">
+            <div class="library-header">
+                <h2>Career Library: <span id="cluster-title">Loading...</span></h2>
+                <p>Explore detailed information on career paths relevant to your assessment result.</p>
+            </div>
+
+            <div id="careers-list">
+                <p>Loading careers...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 PathFinder Career Guidance Program</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', loadCareerLibrary);
+
+        function loadCareerLibrary() {
+            fetch('/api/careers')
+                .then(response => {
+                    if (response.status === 401) {
+                        window.location.href = '/'; 
+                        return;
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('cluster-title').textContent = data.cluster;
+                    const careerListDiv = document.getElementById('careers-list');
+                    careerListDiv.innerHTML = ''; // Clear the "Loading..." message
+
+                    if (data.careers.length === 0) {
+                        careerListDiv.innerHTML = '<p>No specific careers found. Please complete the assessment.</p>';
+                        return;
+                    }
+
+                    data.careers.forEach(career => {
+                        const card = document.createElement('div');
+                        card.className = 'career-card';
+                        
+                        // Add an event listener to simulate selecting the career
+                        card.onclick = () => selectCareer(career.title);
+
+                        card.innerHTML = `
+                            <h3>${career.title}</h3>
+                            <p>${career.detail}</p>
+                            <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.9em; margin-top: 10px;">Select this Career</button>
+                        `;
+                        careerListDiv.appendChild(card);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading careers:', error);
+                    document.getElementById('careers-list').innerHTML = '<p style="color: red;">Error loading career data.</p>';
+                });
+        }
+        
+        // This function would be expanded to update the server and roadmap progress
+        function selectCareer(careerTitle) {
+            alert(`You have selected: ${careerTitle}. This selection will now update your roadmap! (Feature pending)`);
+            
+            // --- Next Development Step: Send selection to server API ---
+            // Example of what the next server update would handle:
+            /*
+            fetch('/api/select-career', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ careerTitle: careerTitle })
+            }).then(() => {
+                window.location.href = '/dashboard';
+            });
+            */
+        }
+    </script>
+</body>
+</html>

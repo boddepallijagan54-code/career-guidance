@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PathFinder 🧭 - Events Calendar</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .calendar-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .event-card {
+            background: #fff;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-left: 5px solid #00b33c; /* Green accent */
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        .event-card h3 {
+            color: #004d99;
+            margin: 0;
+            font-size: 1.2em;
+        }
+        .event-date {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #00b33c;
+            min-width: 80px;
+            text-align: center;
+            border-right: 1px solid #ddd;
+            padding-right: 15px;
+            margin-right: 15px;
+        }
+        .event-details {
+            flex-grow: 1;
+        }
+        .event-meta {
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 5px;
+        }
+        .cluster-tag {
+            background: #e0f7fa;
+            color: #00796b;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-left: 10px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <h1 style="font-size: 1.8em;"><a href="/dashboard" style="text-decoration: none; color: white;">PathFinder 🧭</a></h1>
+            <a href="/dashboard" style="color: white; text-decoration: underline;">Back to Dashboard</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="calendar-container">
+            <h2>Full Events & Workshop Calendar</h2>
+            <p>Here is a list of all upcoming guidance events. Filter by your cluster to see the most relevant ones!</p>
+
+            <div id="events-list">
+                <p>Loading events...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 PathFinder Career Guidance Program</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', loadEventCalendar);
+
+        function loadEventCalendar() {
+            fetch('/api/events')
+                .then(response => {
+                    if (response.status === 401) {
+                        window.location.href = '/'; 
+                        return;
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const eventsListDiv = document.getElementById('events-list');
+                    eventsListDiv.innerHTML = ''; // Clear the "Loading..." message
+
+                    if (data.events.length === 0) {
+                        eventsListDiv.innerHTML = '<p>No upcoming events scheduled.</p>';
+                        return;
+                    }
+
+                    data.events.forEach(event => {
+                        const card = document.createElement('div');
+                        card.className = 'event-card';
+                        
+                        card.innerHTML = `
+                            <div class="event-date">${event.date}</div>
+                            <div class="event-details">
+                                <h3>${event.title} <span class="cluster-tag">${event.cluster_focus} Focus</span></h3>
+                                <p class="event-meta">Location: ${event.location}</p>
+                            </div>
+                        `;
+                        eventsListDiv.appendChild(card);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading events:', error);
+                    document.getElementById('events-list').innerHTML = '<p style="color: red;">Error loading event data.</p>';
+                });
+        }
+    </script>
+</body>
+</html>

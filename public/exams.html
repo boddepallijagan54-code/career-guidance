@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PathFinder 🧭 - Secondary Exams</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .exams-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .exam-list-header {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 5px solid #004d99;
+        }
+        .exam-list-header h3 {
+            margin: 0;
+            color: #004d99;
+        }
+        .exam-item {
+            background: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+        .exam-item:before {
+            content: "➡️";
+            margin-right: 10px;
+            color: #00b33c;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <h1 style="font-size: 1.8em;"><a href="/dashboard" style="text-decoration: none; color: white;">PathFinder 🧭</a></h1>
+            <a href="/dashboard" style="color: white; text-decoration: underline;">Back to Dashboard</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="exams-container">
+            <div class="exam-list-header">
+                <h2>Other Entrance Exams for <span id="cluster-title">Loading...</span></h2>
+                <p>These exams offer alternative pathways or are specific to certain streams within your recommended cluster.</p>
+            </div>
+
+            <div id="exams-list">
+                <p>Loading secondary exams...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 PathFinder Career Guidance Program</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', loadSecondaryExams);
+
+        function loadSecondaryExams() {
+            fetch('/api/secondary-exams')
+                .then(response => {
+                    if (response.status === 401) {
+                        window.location.href = '/'; 
+                        return;
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('cluster-title').textContent = data.cluster;
+                    const examsListDiv = document.getElementById('exams-list');
+                    examsListDiv.innerHTML = ''; // Clear the "Loading..." message
+
+                    if (!data.secondary_exams || data.secondary_exams.length === 0 || data.secondary_exams[0] === 'N/A') {
+                        examsListDiv.innerHTML = '<p>No specific secondary exams are listed for this pathway yet, or please complete the assessment.</p>';
+                        return;
+                    }
+
+                    data.secondary_exams.forEach(exam => {
+                        const item = document.createElement('div');
+                        item.className = 'exam-item';
+                        item.textContent = exam;
+                        examsListDiv.appendChild(item);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading exams:', error);
+                    document.getElementById('exams-list').innerHTML = '<p style="color: red;">Error loading exam data.</p>';
+                });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PathFinder 🧭 - College Pathway Assessment</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .assessment-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+        }
+        .question-block p {
+            font-weight: bold;
+            margin-top: 0;
+            color: #004d99;
+        }
+        .question-block label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 3px;
+            transition: background-color 0.2s;
+        }
+        .question-block label:hover {
+            background-color: #f0f0f0;
+        }
+        .assessment-submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-top: 30px;
+            font-size: 1.2em;
+            background: #00b33c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>PathFinder 🧭 College Pathway Assessment</h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="assessment-container">
+            <h2>Your Future Education Preferences</h2>
+            <p>Select the option that best reflects your interest in further study or future career.</p>
+            
+            <form id="assessment-form">
+                
+                <div class="question-block">
+                    <p>1. Which area of study excites you most for college?</p>
+                    <label><input type="radio" name="q1" value="science" required> Biology, Computer Science, or Engineering.</label>
+                    <label><input type="radio" name="q1" value="humanities"> History, Literature, or Foreign Languages.</label>
+                    <label><input type="radio" name="q1" value="commerce"> Accounting, Economics, or Business Management.</label>
+                </div>
+
+                <div class="question-block">
+                    <p>2. When approaching a problem, you prefer to focus on:</p>
+                    <label><input type="radio" name="q2" value="science" required> Finding a definitive, logical solution based on data or formulas.</label>
+                    <label><input type="radio" name="q2" value="humanities"> Understanding the human impact, context, and ethics involved.</label>
+                    <label><input type="radio" name="q2" value="commerce"> Evaluating the financial feasibility and market opportunities.</label>
+                </div>
+
+                <div class="question-block">
+                    <p>3. If you had to choose a major today, which one sounds most appealing?</p>
+                    <label><input type="radio" name="q3" value="humanities" required> Journalism or Graphic Design.</label>
+                    <label><input type="radio" name="q3" value="science"> Pre-Med or Aerospace Engineering.</label>
+                    <label><input type="radio" name="q3" value="commerce"> Hotel Management or Supply Chain Logistics.</label>
+                </div>
+
+                <div class="question-block">
+                    <p>4. Your ultimate career goal involves:</p>
+                    <label><input type="radio" name="q4" value="commerce" required> Creating a successful business or managing large-scale operations.</label>
+                    <label><input type="radio" name="q4" value="science"> Developing new technology or contributing to scientific discovery.</label>
+                    <label><input type="radio" name="q4" value="humanities"> Communicating ideas, teaching, or working in social services.</label>
+                </div>
+
+                <div class="question-block">
+                    <p>5. Your strengths primarily lie in:</p>
+                    <label><input type="radio" name="q5" value="science" required> Quantitative analysis (working with numbers and calculations).</label>
+                    <label><input type="radio" name="q5" value="humanities"> Verbal and written communication (writing and presenting).</label>
+                    <label><input type="radio" name="q5" value="commerce"> Strategic thinking and organization (planning and budgeting).</label>
+                </div>
+                
+                <button type="submit" class="assessment-submit-btn">Submit Assessment and View Roadmap</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 PathFinder Career Guidance Program</p>
+        </div>
+    </footer>
+
+    <script src="assessment.js"></script>
+</body>
+</html>

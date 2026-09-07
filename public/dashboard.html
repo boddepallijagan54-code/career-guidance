@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PathFinder 🧭 - Student Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen 
+             bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiojVWfpOPNDLOA1HgfnFsGE-X7KbfKIxghA&s')] 
+             bg-no-repeat 
+             bg-cover 
+             bg-center">
+
+    <!-- Header -->
+    <header class="bg-yellow-300 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl text-black font-bold">PathFinder 🧭 Dashboard</h1>
+            <a href="/" 
+               onclick="return confirm('Log out? Progress is not saved permanently.');"
+               class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg transition">
+               Log Out
+            </a>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 pb-4">
+            <p id="welcome-message" class="text-black font-bold">Loading profile...</p>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main class="flex-grow flex justify-center py-10 px-4">
+
+        <div class="max-w-6xl w-full grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+
+            <!-- Assessment -->
+            <section class="bg-white rounded-2xl shadow-lg p-6 text-center">
+                <h2 class="text-xl font-semibold mb-4">1. College Pathway Assessment</h2>
+                <p id="assessment-status-display" class="mb-2">Status: Loading...</p>
+                <p id="assessment-cluster-display" class="mb-4">Cluster: Not Assessed</p>
+                <a href="/assessment.html"
+                   id="start-assessment-btn"
+                   class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">
+                   Start Assessment
+                </a>
+            </section>
+
+            <!-- Roadmap -->
+            <section class="bg-white rounded-2xl shadow-lg p-6">
+                <h2 class="text-xl font-semibold mb-4 text-center">2. Your Career Roadmap</h2>
+
+                <h3 class="font-semibold text-blue-800">Your Recommended Path:</h3>
+                <p id="roadmap-pathway" class="italic mb-4">Loading pathway details...</p>
+
+                <h3 class="font-semibold mt-4">Key Subjects to Master:</h3>
+                <ul id="roadmap-subjects" class="list-disc pl-6 mb-4"></ul>
+
+                <h3 class="font-semibold mt-4">Suggested Action Plan:</h3>
+                <ul id="roadmap-action-plan" class="list-disc pl-6 mb-4"></ul>
+
+                <a href="/library.html"
+                   id="library-btn"
+                   class="inline-block bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg transition mt-2">
+                   Explore Career Library
+                </a>
+
+                <h3 class="font-semibold mt-6">Overall Progress:</h3>
+                <ul id="roadmap-list" class="mt-2 space-y-1">
+                    <li>Assessment: <span id="r-assessment" class="text-red-500">Incomplete</span></li>
+                    <li>Career Selection: <span id="r-selection" class="text-red-500">Incomplete</span></li>
+                    <li>Subjects Chosen: <span id="r-subjects" class="text-red-500">Incomplete</span></li>
+                </ul>
+            </section>
+
+            <!-- Events -->
+            <section class="bg-white rounded-2xl shadow-lg p-6 text-center">
+                <h2 class="text-xl font-semibold mb-4">3. Events & Workshops</h2>
+                <p class="mb-3">Stay informed about your future!</p>
+                <ul class="list-disc pl-6 text-left mb-4">
+                    <li>Nov 15: Tech Careers Panel (Online)</li>
+                    <li>Dec 5: University Application Workshop</li>
+                    <li>Jan 10: STEM Fields Deep Dive</li>
+                </ul>
+                <a href="/calendar.html"
+                   class="inline-block bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition">
+                   View Calendar
+                </a>
+            </section>
+
+            <!-- Exams -->
+            <section class="bg-white rounded-2xl shadow-lg p-6 text-center">
+                <h2 class="text-xl font-semibold mb-4">4. Entrance Exam Preparation</h2>
+
+                <h3 id="exam-main-title" class="font-semibold mb-2">
+                    Focus: Loading...
+                </h3>
+
+                <p id="exam-guidance-focus" class="mb-4 text-sm">
+                    Loading personalized guidance...
+                </p>
+
+                <p id="exam-resource-link" class="font-bold mb-4"></p>
+
+                <a href="/exams.html"
+                   class="inline-block bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition">
+                   Explore More Entrance Exams
+                </a>
+            </section>
+
+            <!-- Chatbot -->
+            <section class="bg-white rounded-2xl shadow-lg p-6 col-span-full md:col-span-2 lg:col-span-3">
+                <h2 class="text-xl font-semibold mb-4 text-center">
+                    PathFinder ChatBot 🤖
+                </h2>
+
+                <div id="chat-window" class="border rounded-lg p-4 h-48 overflow-y-auto bg-gray-50 mb-4">
+                    <div class="bg-blue-100 text-blue-800 p-2 rounded-lg inline-block">
+                        Hello! I'm the PathFinder bot. Ask me about your <strong>cluster</strong>, <strong>exams</strong>, or <strong>careers</strong>!
+                    </div>
+                </div>
+
+                <div class="flex gap-2">
+                    <input type="text"
+                           id="chat-input"
+                           placeholder="Type your question..."
+                           class="flex-grow border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button id="chat-send"
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">
+                        Send
+                    </button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white text-center py-4 mt-10">
+        © 2025 PathFinder Career Guidance Program
+    </footer>
+
+    <script src="dashboard.js"></script>
+    <script src="chatbot.js"></script>
+
+</body>
+</html>

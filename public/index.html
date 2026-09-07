@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PathFinder 🧭 - Student Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-cover bg-center flex items-center justify-center"
+      style="background-image: url('https://tailwindflex.com/storage/thumbnails/frorest-green-gradient/canvas.min.webp?v=1');">
+
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+
+    <!-- Registration Box -->
+    <div class="relative bg-white bg-opacity-95 backdrop-blur-lg shadow-2xl rounded-2xl p-10 w-full max-w-lg">
+
+        <!-- Title -->
+        <h1 class="text-3xl font-bold text-center text-blue-800 mb-6">
+            PathFinder 🧭 Student Registration
+        </h1>
+
+        <h2 class="text-xl font-semibold text-center mb-6 text-gray-700">
+            Create Your Student Account
+        </h2>
+
+        <form action="/register" method="POST" class="space-y-5">
+
+            <!-- Full Name -->
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">
+                    Full Name
+                </label>
+                <input type="text" name="name"
+                       placeholder="E.g., Alex Johnson"
+                       required
+                       class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <!-- Class -->
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">
+                    Current Class/Grade
+                </label>
+                <input type="text" name="studentClass"
+                       placeholder="E.g., 10th Grade / Class 12"
+                       required
+                       class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">
+                    School Email
+                </label>
+                <input type="email" name="email"
+                       placeholder="E.g., alex@school.edu"
+                       required
+                       class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <!-- Button -->
+            <button type="submit"
+                    class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition duration-300">
+                SIGN UP AND GET STARTED
+                
+            </button>
+
+            <p class="text-sm text-center text-gray-600">
+                Data will be logged to the server console (no database storage).
+            </p>
+
+        </form>
+
+        <!-- Footer -->
+        <p class="text-center text-xs text-gray-500 mt-6">
+            © 2025 PathFinder Career Guidance Program
+        </p>
+
+    </div>
+
+</body>
+</html>
